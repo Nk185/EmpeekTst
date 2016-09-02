@@ -13,7 +13,8 @@ namespace EmpeekTst.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
-            return View(new LocalDrives());
+            LocalDrives drives = new LocalDrives();
+            return View(drives);
         }
     }
 }

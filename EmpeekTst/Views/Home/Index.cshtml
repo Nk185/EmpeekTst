@@ -22,7 +22,7 @@
         <div class="drives">
             @foreach (DriveInfo drive in Model.Drives)
             {
-                <div id="Drive @drive.VolumeLabel" class="drive" onclick="@("window.location.href='" + Url.Action("Index", "Browser", new { dirPath = drive.RootDirectory }) + "'")">
+                <div id="Drive @drive.Name" class="drive" onclick="@("window.location.href='" + Url.Action("Index", "Browser", new { chosenDriveName = drive.Name }) + "'")">
                     <div class="driveIcon">
                         <img src="~/Content/Icons/Drive.png" height="100" width="100">
                     </div>
