@@ -1,0 +1,45 @@
+﻿@model EmpeekTst.Models.LocalDrives
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/CSS/Common.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/CSS/CommonAnimations.css" />
+    <title>Files browser</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <span>AVAILABLE DRIVES:</span>
+        </div>
+
+        <div class="drives">
+            @foreach (DriveInfo drive in Model.Drives)
+            {
+                <div id="Drive @drive.VolumeLabel" class="drive" onclick="@("window.location.href='" + Url.Action("Index", "Browser", new { dirPath = drive.RootDirectory }) + "'")">
+                    <div class="driveIcon">
+                        <img src="~/Content/Icons/Drive.png" height="100" width="100">
+                    </div>
+                    <div class="driveDescription">
+                        <div class="driveLabel">
+                            <span>@drive.VolumeLabel</span>
+                        </div>
+                        <div class="drivePath">
+                            <span>@drive.Name</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="footer">
+        <span style="font-family: Segoe UI; font-size: 0.8em; color: rgb(107, 107, 107);">Design, content and code. &#169; 2016 Nk185.</span>
+    </div>
+</body>
+</html>
