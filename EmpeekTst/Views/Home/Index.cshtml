@@ -19,7 +19,7 @@
             <span>AVAILABLE DRIVES:</span>
         </div>
 
-        <div class="drives">
+        <div class="content">
             @foreach (DriveInfo drive in Model.Drives)
             {
                 <div id="Drive @drive.Name" class="drive" onclick="@("window.location.href='" + Url.Action("Index", "Browser", new { chosenDriveName = drive.Name }) + "'")">

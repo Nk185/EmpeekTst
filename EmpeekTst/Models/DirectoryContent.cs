@@ -10,22 +10,28 @@ namespace EmpeekTst.Models
     public class TotalFilesWithCondition
     {
         public string ConditionName { get; set; }
-        public uint FilesCount { get; set; }
+        public int FilesCount { get; set; }
     }
 
     public class DirectoryContent
     {
-        public string DirPath { get; set; } // Represents path to current directory
-        public List<FileInfo> Files { get { return HDDInspector.GetFiles(new DirectoryInfo(DirPath)); } } // Contains all files in current directory
+        private readonly string _dirPath;  // Represents path to current directory
+        public string DirPath { get { return _dirPath; } }
+        public List<FileInfo> Files { get { return HDDInspector.GetFiles(new DirectoryInfo(_dirPath)); } } // Contains all files in current directory
         public List<DirectoryInfo> Directories
         {
-            get { return HDDInspector.GetDirictories(new DirectoryInfo(DirPath)); }
+            get { return HDDInspector.GetDirictories(new DirectoryInfo(_dirPath)); }
         } // Contains all dirs in current dir
         public List<TotalFilesWithCondition> FilesCountWithSpecificCondition { get; set; } // Contains all specific conditions as string and count of files with these conds.
 
+        public DirectoryContent(string dirPath)
+        {
+            _dirPath = dirPath;
+        }
+
         public override string ToString()
         {
-            return DirPath;
+            return _dirPath;
         }
     }
 }

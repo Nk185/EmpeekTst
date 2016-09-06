@@ -36,9 +36,20 @@ namespace Services.DriveServices
         {
             if (!inDirectory.Exists)
                 return -1;
+            
+            int res = 0;
 
-            return inDirectory.GetFiles().Where(filePredicate).ToArray().Length +
-                   inDirectory.GetDirectories().Sum(dir => FilesCountWithCondition(filePredicate, dir));
+            try
+            {
+                res = inDirectory.GetFiles().Where(filePredicate).ToArray().Length +
+                      inDirectory.GetDirectories().Sum(dir => FilesCountWithCondition(filePredicate, dir));
+            }
+            catch (Exception)
+            {
+              
+            }
+
+            return res;
         }
     }
 }

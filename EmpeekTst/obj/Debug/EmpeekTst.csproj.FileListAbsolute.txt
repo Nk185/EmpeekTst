@@ -18,3 +18,11 @@ C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\bin\System.Web.Mvc.xml
 C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\obj\Debug\EmpeekTst.csprojResolveAssemblyReference.cache
 C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\obj\Debug\EmpeekTst.dll
 C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\obj\Debug\EmpeekTst.pdb
+C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\bin\Newtonsoft.Json.dll
+C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\bin\System.Net.Http.Formatting.dll
+C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\bin\System.Web.Http.dll
+C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\bin\System.Web.Http.WebHost.dll
+C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\bin\Newtonsoft.Json.xml
+C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\bin\System.Net.Http.Formatting.xml
+C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\bin\System.Web.Http.xml
+C:\Users\Nk\Desktop\Empeek\EmpeekTst\EmpeekTst\bin\System.Web.Http.WebHost.xml

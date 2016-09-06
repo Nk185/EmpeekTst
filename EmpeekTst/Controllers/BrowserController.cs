@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EmpeekTst.Models;
+using Services.DriveServices;
 
 namespace EmpeekTst.Controllers
 {
@@ -14,10 +15,10 @@ namespace EmpeekTst.Controllers
         // GET: /Browser/
         public ActionResult Index(string chosenDriveName)
         {
-            DirectoryContent directoryContent = new DirectoryContent();
-            directoryContent.DirPath = new DriveInfo(chosenDriveName).RootDirectory.FullName;
+            if (chosenDriveName == null)
+                chosenDriveName = @"C:\";
 
-            return View(directoryContent);
+            return View((object)chosenDriveName);
         }
 	}
 }

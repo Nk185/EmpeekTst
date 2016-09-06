@@ -1,4 +1,4 @@
-﻿@model EmpeekTst.Models.DirectoryContent
+﻿@model string
 
 @{
     Layout = null;
@@ -6,15 +6,115 @@
 
 <!DOCTYPE html>
 
-<html>
+<html ng-app="browserApp">
 <head>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="stylesheet" type="text/css" href="~/Content/CSS/Common.css" />
     <title>Index</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/CSS/Common.css"/>
+    <link href="~/Content/CSS/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/angular.js"></script>
+    <script>
+        var browserApp = angular.module("browserApp", []);
+
+        browserApp.controller("browserAppCtrl",
+            function($scope, $http) {
+
+                function nextDirLoader(dir) {
+
+                    var reqURL = '/api/Browsing?dir_path=' + dir;
+
+                    $http.get(reqURL)
+                        .success(function(data) {
+                            $scope.data = data;
+                        });
+                }
+
+                function prevDirLoader(dir) {
+
+                    var reqURL = '/api/Browsing?parentOf=' + dir;
+
+                    $http.get(reqURL)
+                        .success(function (data) {
+                            if (!data.OpenDriveSelectionDlg)
+                                $scope.data = data;
+                            else
+                                window.location.href = "/Home";
+                        });
+                }
+
+                $scope.DirClickHandler = nextDirLoader;
+                $scope.PreviousFolderClick = prevDirLoader;
+                nextDirLoader(@Html.Raw(Json.Encode(Model)));
+            });
+    </script>
 </head>
-<body>
-<div>
-    <p>Was chosen: @Model.DirPath</p>
+
+<body ng-controller="browserAppCtrl">
+<div class="wrapper">
+    <div class="header browser">
+        <span>BROWSING FILES ON DISC "@Model[0]"</span>
+    </div>
+    <div class="topMenuBar">
+        <input type="button" class="btn backToMainMenu" title="Go back" value="Select drive" onclick="@("window.location.href='" + Url.Action("Index", "Home") + "'")"/>
+    </div>
+    <div class="content browser">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="tableHeader">Files with conditions:</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td ng-repeat="condition in data.FilesCountWithSpecificCondition" class="tableInfoCollumnName">{{condition.ConditionName}}</td>
+                </tr>
+                <tr>
+                    <td ng-repeat="condition in data.FilesCountWithSpecificCondition" class="tableInfoCollumnValue">{{condition.FilesCount}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive dirsAndFiles">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <td colspan="2">Files in directory {{data.DirPath}}</td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-click="PreviousFolderClick(data.DirPath)" class="directory">
+                        <td colspan="2">
+                            <span>...</span>
+                        </td>
+                    </tr>
+                <tr ng-repeat="dir in data.Directories" ng-click="DirClickHandler(dir.FullPath)" class="directory">
+                    <td>
+                        <img src="~/Content/Icons/folder.png" height="16" width="16">
+                    </td>
+                    <td>
+                        <div>
+                            <span>{{dir.OriginalPath}}</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-repeat="file in data.Files">
+                    <td>
+                        <img src="~/Content/Icons/file.png" height="16" width="16">
+                    </td>
+                    <td>
+                        <div class="file">
+                            <span>{{file.OriginalPath}}</span>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <span style="font-family: Segoe UI; font-size: 0.8em; color: rgb(107, 107, 107);">Design, content and code. &#169; 2016 Nk185.</span>
 </div>
 </body>
 </html>
